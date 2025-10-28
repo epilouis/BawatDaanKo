@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Our Love Story - Bawat Daan</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       height: 100vh;
       display: flex;
       align-items: center;
@@ -15,17 +20,18 @@
       font-family: 'Georgia', serif;
       color: #fff;
       overflow: hidden;
+      position: relative;
     }
 
     /* Floating particles (emotional vibe) */
-   body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-  animation: moveStars 80s linear infinite;
-  opacity: 0.6;
-}
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+      animation: moveStars 80s linear infinite;
+      opacity: 0.6;
+    }
 
     @keyframes moveStars {
       from { background-position: 0 0; }
@@ -47,43 +53,51 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
-    .slide.active { opacity: 1; }
+    
+    .slide.active { 
+      opacity: 1; 
+    }
 
-   .slide-media, .slide-img {
-  max-width: 450px;
-  max-height: 350px;
-  border-radius: 25px; /* soft rounded edges */
-  border: 4px solid rgba(255, 182, 193, 0.8); /* pink glow border */
-  box-shadow: 0 0 25px rgba(255, 105, 180, 0.6),
-              0 0 50px rgba(255, 182, 193, 0.4);
-  object-fit: cover;
-  animation: floatMemory 6s ease-in-out infinite;
-}
+    .slide-media, .slide-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      border-radius: 25px;
+      border: 4px solid rgba(255, 182, 193, 0.8);
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6),
+                  0 0 50px rgba(255, 182, 193, 0.4);
+      object-fit: cover;
+      animation: floatMemory 6s ease-in-out infinite;
+    }
 
-@keyframes floatMemory {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-12px) rotate(1deg); }
-}
-
+    @keyframes floatMemory {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
 
     /* Lyrics styling */
     .lyrics {
-      font-size: 2.3em;
+      font-size: clamp(1.2rem, 4vw, 2.3rem);
       font-family: 'Dancing Script', cursive;
       text-align: center;
       background: rgba(0,0,0,0.5);
-      padding: 20px 40px;
+      padding: 15px 25px;
       border-radius: 15px;
-      max-width: 80%;
+      width: 90%;
+      max-width: 800px;
       position: absolute;
-      bottom: 12%;
+      bottom: 10%;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
       opacity: 0;
       transition: opacity 0.8s ease, transform 0.8s ease;
       text-shadow: 0 0 15px rgba(255,150,255,0.8);
+      backdrop-filter: blur(5px);
     }
+    
     .lyrics.show {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
@@ -100,16 +114,21 @@
       flex-direction: column;
       text-align: center;
       color: #fff;
+      padding: 20px;
+      z-index: 10;
     }
+    
     .start-screen h1 {
-      font-size: 3.5em;
+      font-size: clamp(2rem, 8vw, 3.5rem);
       margin-bottom: 20px;
       font-family: 'Dancing Script', cursive;
       text-shadow: 0 0 25px rgba(255,255,255,0.8);
+      padding: 0 10px;
     }
+    
     .start-btn {
       padding: 15px 50px;
-      font-size: 1.5em;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -119,36 +138,79 @@
       transition: transform 0.3s, background 0.3s;
       box-shadow: 0 0 25px rgba(255,255,255,0.6);
     }
+    
     .start-btn:hover {
       background: #ffe6ff;
       transform: scale(1.1);
     }
 
-    #lyricsBox {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.8rem;
-  color: #fff;
-  background: rgba(255, 182, 193, 0.2);
-  border: 2px dashed rgba(255, 255, 255, 0.6);
-  padding: 20px 30px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 70%;
-  margin: 20px auto;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
-}
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+      .slide {
+        padding: 15px;
+      }
+      
+      .slide-media, .slide-img {
+        max-width: 95%;
+        max-height: 70%;
+      }
+      
+      .lyrics {
+        bottom: 5%;
+        padding: 12px 20px;
+      }
+    }
 
-@media (max-width: 600px) {
+    @media (max-width: 480px) {
+      .slide {
+        padding: 10px;
+      }
+      
+      .slide-media, .slide-img {
+        max-width: 100%;
+        max-height: 65%;
+        border-width: 2px;
+      }
+      
+      .lyrics {
+        bottom: 3%;
+        padding: 10px 15px;
+        width: 95%;
+      }
+      
+      .start-btn {
+        padding: 12px 40px;
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 320px) {
+      .slide-media, .slide-img {
+        max-height: 60%;
+      }
+      
       .lyrics {
         font-size: 1rem;
         padding: 8px 12px;
       }
-      .media-wrapper {
-        aspect-ratio: 4 / 3;
+    }
+
+    /* For landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .slide-media, .slide-img {
+        max-height: 80%;
+        max-width: 70%;
+      }
+      
+      .lyrics {
+        bottom: 5%;
+        font-size: 1.2rem;
       }
     }
-    audio { display: none; }
+
+    audio { 
+      display: none; 
+    }
   </style>
   <!-- Google Font for emotional handwriting -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
@@ -160,352 +222,344 @@
     <button class="start-btn">Open My Heart</button>
   </div>
 
+  <div class="slideshow">
+    <!-- Line 1 (0s) -->
+    <div class="slide active">
+      <img src="pic (16).jpeg" class="slide-img">
+    </div>
 
-<div class="slideshow">
-  <!-- Line 1 (0s) -->
-  <div class="slide active">
-    <img src="pic (16).jpeg" class="slide-img"> <!-- Sa pagkumpas ng iyong kamay -->
+    <!-- Line 2 (7s) -->
+    <div class="slide">
+      <img src="pic (4).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 3 (13s) -->
+    <div class="slide">
+      <img src="pic (2).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 4 (20s) -->
+    <div class="slide">
+      <img src="pic (14).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 5 (26s) -->
+    <div class="slide">
+      <img src="pic.jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 6 (34s) -->
+    <div class="slide">
+      <img src="pic (22).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 7 (39s) -->
+    <div class="slide">
+      <img src="pic (24).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 8 (46s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 9 (53s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (2).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 10 (63s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (3).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 11 (69s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (4).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 12 (75s) -->
+    <div class="slide">
+      <img src="pic (3).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 13 (82s) -->
+    <div class="slide">
+      <img src="pic (27).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 14 (88s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (5).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 15 (93s) -->
+    <div class="slide">
+      <img src="pic (28).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 16 (100s) -->
+    <div class="slide">
+      <img src="pic (29).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 17 (103s) -->
+    <div class="slide">
+      <img src="pic (30).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 18 (106s) -->
+    <div class="slide">
+      <img src="pic (32).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 19 (115s) -->
+    <div class="slide">
+      <img src="pic (23).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 20 (121s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (1).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 21 (127s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (7).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 22 (133s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (2).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 23 (140s) -->
+    <div class="slide">
+      <img src="pic (21).jpg" class="slide-img">
+    </div>
+
+    <!-- Line 24 (146s) -->
+    <div class="slide">
+      <img src="pic (5).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 25 (151s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (6).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 26 (159s) -->
+    <div class="slide">
+      <img src="pic (20).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 27 (167s) -->
+    <div class="slide">
+      <img src="pic (2).png" class="slide-img">
+    </div>
+
+    <!-- Line 28 (176s) -->
+    <div class="slide">
+      <img src="pic (15).jpg" class="slide-img">
+    </div>
+
+    <!-- Line 29 (180s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (9).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 30 (188s) -->
+    <div class="slide">
+      <img src="pic (19).jpeg" class="slide-img">
+    </div>
+
+    <!-- Line 31 (194s) -->
+    <div class="slide">
+      <img src="pic.png" class="slide-img">
+    </div>
+
+    <!-- Line 32 (201s) -->
+    <div class="slide">
+      <img src="pic (20).jpg" class="slide-img">
+    </div>
+
+    <!-- Line 33 (206s) -->
+    <div class="slide">
+      <video class="slide-media" autoplay muted loop playsinline>
+        <source src="vid (8).mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Line 34 (212s) -->
+    <div class="slide">
+      <img src="pic (13).jpg" class="slide-img">
+    </div>
+
+    <!-- Line 35 (215s) -->
+    <div class="slide">
+      <img src="pic (1).jpg" class="slide-img">
+    </div>
+
+    <!-- Line 36 (220s) -->
+    <div class="slide">
+      <img src="pic (6).jpeg" class="slide-img">
+    </div>
   </div>
 
-  <!-- Line 2 (7s) -->
-  <div class="slide">
-    <img src="pic (4).jpeg" class="slide-img"> <!-- Aking landas ginagabay -->
-  </div>
-
-  <!-- Line 3 (13s) -->
-  <div class="slide">
-    <img src="pic (2).jpeg" class="slide-img"> <!-- Nag-iisang tiyak sa isang libong duda -->
-  </div>
-
-  <!-- Line 4 (20s) -->
-  <div class="slide">
-    <img src="pic (14).jpeg" class="slide-img"> <!-- Silong sa iyak at pagluluksa -->
-  </div>
-
-  <!-- Line 5 (26s) -->
-  <div class="slide">
-    <img src="pic.jpeg" class="slide-img"> <!-- Kung puso ko ay imamapa -->
-  </div>
-
-  <!-- Line 6 (34s) -->
-  <div class="slide">
-    <img src="pic (22).jpeg" class="slide-img"> <!-- Ikaw ang dulo, gitna't simula -->
-  </div>
-
-  <!-- Line 7 (39s) -->
-  <div class="slide">
-    <img src="pic (24).jpeg" class="slide-img"> <!-- Nahanap din kita (Kay tagal kong naghintay) -->
-  </div>
-
-  <!-- Line 8 (46s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid.mp4" type="video/mp4">
-    </video> <!-- Nahanap din kita (Kay tagal kong naghintay) -->
-  </div>
-
-  <!-- Line 9 (53s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (2).mp4" type="video/mp4">
-    </video> <!-- Oh, maligaw man at mawala -->
-  </div>
-
-  <!-- Line 10 (63s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (3).mp4" type="video/mp4">
-    </video> <!-- At umikot man sa kawalan -->
-  </div>
-
-  <!-- Line 11 (69s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (4).mp4" type="video/mp4">
-    </video> <!-- Sa bawat kailan, sino't saan -->
-  </div>
-
-  <!-- Line 12 (75s) -->
-  <div class="slide">
-    <img src="pic (3).jpeg" class="slide-img"> <!-- Ikaw lamang ang kasagutan -->
-  </div>
-
-  <!-- Line 13 (82s) -->
-  <div class="slide">
-    <img src="pic (27).jpeg" class="slide-img"> <!-- Bawat kanan at kaliwa -->
-  </div>
-
-  <!-- Line 14 (88s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (5).mp4" type="video/mp4">
-    </video> <!-- Kung timog man o hilaga -->
-  </div>
-
-  <!-- Line 15 (93s) -->
-  <div class="slide">
-    <img src="pic (28).jpeg" class="slide-img"> <!-- Ang bawat daan ko -->
-  </div>
-
-  <!-- Line 16 (100s) -->
-  <div class="slide">
-    <img src="pic (29).jpeg" class="slide-img"> <!-- Ay patungo (Ay patungo) -->
-  </div>
-
-  <!-- Line 17 (103s) -->
-  <div class="slide">
-    <img src="pic (30).jpeg" class="slide-img"> <!-- Ay pabalik (Ay pabalik) -->
-  </div>
-
-  <!-- Line 18 (106s) -->
-  <div class="slide">
-    <img src="pic (32).jpeg" class="slide-img"> <!-- Sa'yo -->
-  </div>
-
-  <!-- Line 19 (115s) -->
-  <div class="slide">
-    <img src="pic (23).jpeg" class="slide-img"> <!-- Kay tagal nang lumulutang -->
-  </div>
-
-  <!-- Line 20 (121s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (1).mp4" type="video/mp4">
-    </video> <!-- Walang pupuntahan, walang dahilan -->
-  </div>
-
-  <!-- Line 21 (127s) -->
-  
-    
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (7).mp4" type="video/mp4">
-    </video> 
-  </div> <!-- Parang ulap na, walang dalang ulan -->
-  
-
-  <!-- Line 22 (133s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (2).mp4" type="video/mp4">
-    </video> 
-    <!-- Kamang walang kumot at unan -->
-  </div>
-
-  <!-- Line 23 (140s) -->
-  <div class="slide">
-    <img src="pic (21).jpg" class="slide-img"> <!-- Bihag ako ng pagtataka -->
-  </div>
-
-  <!-- Line 24 (146s) -->
-  <div class="slide">
-    <img src="pic (5).jpeg" class="slide-img"> <!-- May saysay ba ang paglalakbay? -->
-  </div>
-
-  <!-- Line 25 (151s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (6).mp4" type="video/mp4">
-    </video> <!-- Ngunit nahanap din kita -->
-  </div>
-
-  <!-- Line 26 (159s) -->
-  <div class="slide">
-    <img src="pic (20).jpeg" class="slide-img"> <!-- Nahanap kita -->
-  </div>
-
-  <!-- Line 27 (167s) -->
-  <div class="slide">
-    <img src="pic (2).png" class="slide-img"> <!-- Oh, maligaw man at mawala -->
-  </div>
-
-  <!-- Line 28 (176s) -->
-  <div class="slide">
-    <img src="pic (15).jpg" class="slide-img"> <!-- At umikot man sa kawalan -->
-  </div>
-
-  <!-- Line 29 (180s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (9).mp4" type="video/mp4">
-    </video> <!-- Kahit sa bawat kailan, sino't saan -->
-  </div>
-
-  <!-- Line 30 (188s) -->
-  <div class="slide">
-    <img src="pic (19).jpeg" class="slide-img"> <!-- Ikaw lamang ang kasagutan -->
-  </div>
-
-  <!-- Line 31 (194s) -->
-  <div class="slide">
-    <img src="pic.png" class="slide-img"> <!-- Bawat kanan at kaliwa -->
-  </div>
-
-  <!-- Line 32 (201s) -->
-  <div class="slide">
-    <img src="pic (20).jpg" class="slide-img"> <!-- Kung timog man o hilaga -->
-  </div>
-
-  <!-- Line 33 (206s) -->
-  <div class="slide">
-    <video class="slide-media" autoplay muted loop>
-      <source src="vid (8).mp4" type="video/mp4">
-    </video> <!-- Ang bawat bawat daan ko -->
-  </div>
-
-  <!-- Line 34 (212s) -->
-  <div class="slide">
-    <img src="pic (13).jpg" class="slide-img"> <!-- Ay patungo (Ay patungo) -->
-  </div>
-
-  <!-- Line 35 (215s) -->
-  <div class="slide">
-    <img src="pic (1).jpg" class="slide-img"> <!-- Ay pabalik (Ay pabalik) -->
-  </div>
-
-  <!-- Line 36 (220s) -->
-  <div class="slide">
-    <img src="pic (6).jpeg" class="slide-img"> <!-- Sa'yo -->
-  </div>
-</div>
- 
   <!-- ONE lyric box -->
   <div id="lyricsBox" class="lyrics"></div>
-</div>
-
-
 
   <audio id="bgMusic" src="bg.mp3"></audio>
 
-<script>
-const slides = document.querySelectorAll('.slide');
-const bgMusic = document.getElementById('bgMusic');
-const startScreen = document.querySelector('.start-screen');
-const slideshow = document.querySelector('.slideshow');
-const startBtn = document.querySelector('.start-btn');
-const lyricsBox = document.getElementById('lyricsBox');
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const bgMusic = document.getElementById('bgMusic');
+    const startScreen = document.querySelector('.start-screen');
+    const slideshow = document.querySelector('.slideshow');
+    const startBtn = document.querySelector('.start-btn');
+    const lyricsBox = document.getElementById('lyricsBox');
 
-// Lyrics array
-const lyrics = [
-  "Sa pagkumpas ng iyong kamay",        // Line 1 (0s)
-  "Aking landas ginagabay",             // Line 2 (7s)
-  "Nag-iisang tiyak sa isang libong duda", // Line 3 (13s)
-  "Silong sa iyak at pagluluksa",       // Line 4 (20s)
-  "Kung puso ko ay imamapa",            // Line 5 (26s)
-  "Ikaw ang dulo, gitna't simula",      // Line 6 (34s)
-  "Nahanap din kita (Kay tagal kong naghintay)", // Line 7 (39s)
-  "Nahanap din kita (Kay tagal kong naghintay)", // Line 8 (46s)
-  "Oh, maligaw man at mawala",          // Line 9 (53s)
-  "At umikot man sa kawalan",           // Line 10 (63s)
-  "Sa bawat kailan, sino't saan",       // Line 11 (69s)
-  "Ikaw lamang ang kasagutan",          // Line 12 (75s)
-  "Bawat kanan at kaliwa",              // Line 13 (81s)
-  "Kung timog man o hilaga",            // Line 14 (88s)
-  "Ang bawat daan ko",                  // Line 15 (93s)
-  "Ay patungo (Ay patungo)",            // Line 16 (100s)
-  "Ay pabalik (Ay pabalik)",            // Line 17 (103s)
-  "Sa'yo",                              // Line 18 (106s)
+    // Lyrics array
+    const lyrics = [
+      "Sa pagkumpas ng iyong kamay",
+      "Aking landas ginagabay",
+      "Nag-iisang tiyak sa isang libong duda",
+      "Silong sa iyak at pagluluksa",
+      "Kung puso ko ay imamapa",
+      "Ikaw ang dulo, gitna't simula",
+      "Nahanap din kita (Kay tagal kong naghintay)",
+      "Nahanap din kita (Kay tagal kong naghintay)",
+      "Oh, maligaw man at mawala",
+      "At umikot man sa kawalan",
+      "Sa bawat kailan, sino't saan",
+      "Ikaw lamang ang kasagutan",
+      "Bawat kanan at kaliwa",
+      "Kung timog man o hilaga",
+      "Ang bawat daan ko",
+      "Ay patungo (Ay patungo)",
+      "Ay pabalik (Ay pabalik)",
+      "Sa'yo",
+      "Kay tagal nang lumulutang",
+      "Walang pupuntahan, walang dahilan",
+      "Parang ulap na, walang dalang ulan",
+      "Kamang walang kumot at unan",
+      "Bihag ako ng pagtataka",
+      "May saysay ba ang paglalakbay?",
+      "Ngunit nahanap din kita (Kay tagal kong naghintay)",
+      "Nahanap kita (Kay tagal kong naghintay)",
+      "Oh, maligaw man at mawala",
+      "At umikot man sa kawalan",
+      "Kahit sa bawat kailan, sino't saan",
+      "Ikaw lamang ang kasagutan",
+      "Bawat kanan at kaliwa (Kay tagal kong naghintay)",
+      "Kung timog man o hilaga (Kay tagal kong naghintay)",
+      "Ang bawat daan ko (Kay tagal kong naghintay)",
+      "Ay patungo (Kay tagal kong naghintay)",
+      "Ay pabalik (Ay pabalik)",
+      "Sa'yo",
+      "(Kay tagal kong naghintay) Sa iyo",
+      "(Kay tagal kong naghintay) Ooh-ooh",
+      "Kung ang puso ko ay imamapa",
+      "Ikaw ang dulo, ang gitna't simula",
+      "Ikaw, ikaw"
+    ];
 
+    const lyricTimings = [
+      0, 7, 13, 20, 27, 34, 39, 46, 53, 63, 69, 75, 82, 88, 93, 100, 103, 106,
+      115, 121, 127, 133, 140, 146, 151, 159, 165.5, 175.5, 181, 188, 194, 201,
+      206, 212, 216, 219, 226, 238, 244, 256, 273
+    ];
 
-  "Kay tagal nang lumulutang",          // Line 19 (115s)
-  "Walang pupuntahan, walang dahilan",  // Line 20 (121s)
-  "Parang ulap na, walang dalang ulan", // Line 21 (127s)
-  "Kamang walang kumot at unan",        // Line 22 (133s)
-  "Bihag ako ng pagtataka",             // Line 23 (140s)
-  "May saysay ba ang paglalakbay?",     // Line 24 (146s)
-  "Ngunit nahanap din kita (Kay tagal kong naghintay)", // Line 25 (151s)
-  "Nahanap kita (Kay tagal kong naghintay)",            // Line 26 (159s)
-  "Oh, maligaw man at mawala",          // Line 27 (165.5s)
-  "At umikot man sa kawalan",           // Line 28 (175.5s)
-  "Kahit sa bawat kailan, sino't saan", // Line 29 (181s)
-  "Ikaw lamang ang kasagutan",          // Line 30 (188s)
-  "Bawat kanan at kaliwa (Kay tagal kong naghintay)", // Line 31 (194s)
-  "Kung timog man o hilaga (Kay tagal kong naghintay)", // Line 32 (201s)
-  "Ang bawat daan ko (Kay tagal kong naghintay)", // Line 33 (206s)
-  "Ay patungo (Kay tagal kong naghintay)", // Line 34 (212s)
-  "Ay pabalik (Ay pabalik)",            // Line 35 (215s)
-  "Sa'yo",                              // Line 36 (218s)
-  "(Kay tagal kong naghintay) Sa iyo",  // Line 37 (226s)
-  "(Kay tagal kong naghintay) Ooh-ooh", // Line 38 (238s)
-  "Kung ang puso ko ay imamapa",        // Line 39 (244s)
-  "Ikaw ang dulo, ang gitna't simula",  // Line 40 (256s)
-  "Ikaw, ikaw"                          // Line 41 (263s)
-];
+    let current = -1;
 
+    // Update lyrics with fade animation
+    function updateLyric(newText) {
+      lyricsBox.classList.remove('show');
+      setTimeout(() => {
+        lyricsBox.textContent = newText;
+        lyricsBox.classList.add('show');
+      }, 200);
+    }
 
-const lyricTimings = [
-  0, 7, 13, 20, 27, 34, 39, 46, 53, 63, 69, 75, 82, 88, 93, 100, 103, 106,
-  115, 121, 127, 133, 140, 146, 151, 159, 165.5, 175.5, 181, 188, 194, 201,
-  206, 212, 216, 219, 226, 238, 244, 256, 273
-];
-
-
-let current = -1; // start with -1 so first line shows
-
-// Update lyrics with fade animation
-function updateLyric(newText) {
-  lyricsBox.classList.remove('show'); // remove old animation
-  setTimeout(() => {
-    lyricsBox.textContent = newText;
-    lyricsBox.classList.add('show'); // trigger fade-in
-  }, 200); // small delay for fade-out
-}
-
-// Show the slide image
-function showSlide(index) {
-  slides.forEach((s, i) => s.classList.remove('active'));
-  slides[index].classList.add('active');
-}
-
-// Sync lyrics with music
-function syncLyrics() {
-  const currentTime = Math.floor(bgMusic.currentTime);
-  for (let i = 0; i < lyricTimings.length; i++) {
-    if (
-      currentTime >= lyricTimings[i] &&
-      (i === lyricTimings.length - 1 || currentTime < lyricTimings[i + 1])
-    ) {
-      if (current !== i) {
-        current = i;
-        updateLyric(lyrics[current]); // show lyric
-        if(slides[i]) showSlide(i);    // show corresponding slide if exists
+    // Show the slide image
+    function showSlide(index) {
+      slides.forEach((s, i) => s.classList.remove('active'));
+      if (slides[index]) {
+        slides[index].classList.add('active');
       }
     }
-  }
-}
 
-// Start button
-startBtn.addEventListener('click', () => {
-  startScreen.style.display = 'none';
-  slideshow.style.display = 'block';
-  bgMusic.play();
-});
+    // Sync lyrics with music
+    function syncLyrics() {
+      const currentTime = Math.floor(bgMusic.currentTime);
+      for (let i = 0; i < lyricTimings.length; i++) {
+        if (
+          currentTime >= lyricTimings[i] &&
+          (i === lyricTimings.length - 1 || currentTime < lyricTimings[i + 1])
+        ) {
+          if (current !== i) {
+            current = i;
+            updateLyric(lyrics[current]);
+            if(slides[i]) showSlide(i);
+          }
+        }
+      }
+    }
 
-// Listen to music time updates
-bgMusic.addEventListener('timeupdate', syncLyrics);
-
-audio.addEventListener("ended", () => {
-  overlay.classList.add("show");
-
-  setTimeout(() => {
-    // Reset everything
-    audio.currentTime = 0;
-    currentLine = 0;
-    lyricsEl.textContent = lyrics[0];
-
-    slides.forEach(s => s.classList.remove("active"));
-    slides[0].classList.add("active");
-
-    overlay.classList.remove("show");
-
-    // Restart the song
-    audio.play().catch(err => {
-      console.log("Autoplay blocked, waiting for user interaction:", err);
+    // Start button
+    startBtn.addEventListener('click', () => {
+      startScreen.style.display = 'none';
+      slideshow.style.display = 'block';
+      
+      // Try to play audio with user interaction
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Autoplay prevented. User interaction required.");
+          // Show a message to user if needed
+        });
+      }
     });
-  }, 4000); // 4s wait before restart
-});
 
-</script>
+    // Listen to music time updates
+    bgMusic.addEventListener('timeupdate', syncLyrics);
 
+    // Handle audio ended event
+    bgMusic.addEventListener('ended', () => {
+      // Optionally restart or show a message when song ends
+      setTimeout(() => {
+        // Restart the slideshow
+        current = -1;
+        bgMusic.currentTime = 0;
+        slides.forEach(s => s.classList.remove('active'));
+        if (slides[0]) slides[0].classList.add('active');
+        
+        // Restart the song
+        bgMusic.play().catch(err => {
+          console.log("Autoplay blocked:", err);
+        });
+      }, 5000); // Wait 5 seconds before restarting
+    });
+  </script>
 </body>
 </html>
